@@ -1,0 +1,26 @@
+body{
+	background-color:black;
+	
+}
+#content{
+	color: white;
+}
+
+#footer{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+    background-color: gray;
+    height: 30px;
+    margin-left: 0px;
+}
+
+#footer > input{
+	display: inline-block;
+}
+
+#footer > p{
+	display: inline-block;
+	font-size: 3;
+}

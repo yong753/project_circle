@@ -1,0 +1,111 @@
+/* 공통부분 */
+
+.container_12{
+	min-height: 1010px;
+}
+
+#personal{
+	min-height: 150%;
+}
+
+#recent-title > p , #chart-title > p{
+	width: 300px;
+}
+
+#recent > div > div > a > img, #chart > div > a > img{
+	width: 220px;
+	height: 220px;
+}
+
+#recent > div> div > .desc > .title, #chart > div > .desc > .title{
+    color: white;
+    font-size: 20px;
+	width:220px;
+	height: 60px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	word-wrap:break-word; 
+	line-height: 30px;
+	vertical-align: bottom;
+	padding-top: 5px;
+}
+
+#recent h1 , #chart h1{
+	margin-left: 190px;
+}
+
+
+/* recent */
+
+#recent{
+    overflow: hidden;
+    position: relative;
+}
+
+#recent .slidebox{
+	width: 3960px;
+	margin-left: -10px;
+}
+
+#recent > div > div > a{
+	display: block;
+	width: 220px;
+	height: 220px;
+	overflow: hidden;
+}
+
+#recent > span{
+	position: absolute;
+	top: 40%;
+	transform: translateY(-50%);
+	display: block;
+	color: black;
+	background: white;
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: bold;
+};
+
+#recent > .prev{
+	left: -30px;
+}
+
+#recent > .next{
+	right: 0;
+}
+
+
+/* chart */
+
+#chart{
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+
+#chart > div > a{
+	display: block;
+	width: 220px;
+	height: 220px;
+	overflow: hidden;
+}
+
+/* 동작버튼  */
+
+#nlbutton{
+	position: relative;
+	left: 47%;
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	font-size: 20px;
+	padding: 0px;
+}

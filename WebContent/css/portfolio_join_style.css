@@ -1,0 +1,64 @@
+#login-menu{
+    margin-top: 30px;
+    height: 960px;
+}
+
+#login-menu p{
+    display: block;
+    width: 200px;
+    margin-left:100px;
+    margin-bottom: 0px;
+    font-size: 17px;
+}
+#login-menu input{
+    width: 300px;
+    height: 30px;
+}
+
+#login-menu input[type="button"]{
+    width: 200px;
+    height: 30px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}
+
+#login-menu h6{
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    font-size: 17px;
+}
+#login-menu label:nth-of-type(6) > input{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}
+#login-menu > fieldset{
+    width: 500px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+#login-menu > fieldset>legend>p{
+    font-size: 20px;
+    display: inline;
+    margin-left: 0px;
+}
+ 
+#login-menu > fieldset > form > input{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 150px;
+    height: 100px;
+    font-size: 18px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+} 

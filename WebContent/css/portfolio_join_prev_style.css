@@ -1,0 +1,16 @@
+#main{
+    height: 1010px;
+}
+
+#main fieldset{
+    border: 1px solid white;
+    margin: 0 auto;
+    margin-top: 100px;
+    text-align: center;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+#main fieldset > legend > p{
+    color: dodgerblue;
+}

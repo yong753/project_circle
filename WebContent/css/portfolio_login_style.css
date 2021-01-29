@@ -1,0 +1,42 @@
+#login-menu{
+    height: 960px;
+}
+
+#login-menu fieldset{
+    border: 1px solid white;
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 200px;
+    text-align: center;
+    border-radius: 20px;
+    height: 400px;
+    padding-top: 30px;
+}
+
+#login-menu fieldset legend p{
+    color: dodgerblue;
+}
+
+#login-menu input{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+#login-menu form > input:last-of-type{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}
+
+#login-menu > fieldset > a >p{
+    margin-left: 70px;
+    color: dodgerblue;
+    margin-bottom:0px;
+} 

@@ -1,0 +1,90 @@
+#board{
+    height: 1010px;
+}
+
+#board > div > h1{
+	color: white;
+}
+
+#board > div > p{
+	font-size: 15px;
+	margin-bottom: 0px;
+}
+
+#board > div > form{
+	display: inline-block;
+	float: left;
+}
+
+/* 첫번째(바깥쪽) 테이블 */
+
+#board > div > table{
+	width: 100%;
+}
+
+#write-menu{
+	text-align: right;
+} 
+
+
+/* 메인 테이블 */
+#maintable {
+	width: 100%;
+	background-color: white;
+   	border-collapse: collapse;
+  	border-spacing: 1px;
+  	text-align: center;
+  	line-height: 1.5;
+  	margin: 20px 0px;
+}
+
+#maintable th {
+  padding: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  vertical-align: top;
+  text-align: center;
+  color: black;
+  background-color: gray;
+}
+
+#maintable th:nth-of-type(2){
+	width: 60%;
+}
+
+#maintable td{
+	border-top: 1px solid lightgray;
+	color: black;
+	font-size: 13px;
+	text-align: center;
+	width: 10%;
+	padding-bottom: 0px;
+	height: 40px;
+}
+
+#maintable td:nth-of-type(2){
+	text-align: left;
+}
+
+#maintable td > a{
+	color: black;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.searchform select, .searchform input{
+	box-sizing: border-box;
+	height: 20px;
+	font-size: 12px;
+	padding: 0px;
+	width: 50px;
+}
+
+.searchform input:first-of-type{
+	width: 150px;
+}
+
+
+
+
+

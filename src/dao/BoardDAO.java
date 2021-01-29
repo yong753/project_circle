@@ -1,0 +1,544 @@
+package dao;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.*;
+import java.util.Vector;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import basic.DBConnectionMgr;
+import basic.UtilMgr;
+import bean.Boardbean;
+
+public class BoardDAO {
+	
+	private DBConnectionMgr pool;
+	private static final String  SAVEFOLDER = "c:/fileupload";
+	private static final String ENCTYPE = "UTF-8";
+	private static int MAXSIZE = 5*1024*1024;
+
+	public BoardDAO() {
+		try {
+			pool = DBConnectionMgr.getInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Vector<Boardbean> getBoardList(String keyField, String keyWord,
+			int start, int end) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<Boardbean> vlist = new Vector<Boardbean>();
+		try {
+			con = pool.getConnection();
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from board order by ref desc, pos asc)) where numrow>=? and numrow<=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				System.out.println("그냥");
+			} else {
+				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from board where lower("+keyField+") like ? order by ref desc, pos asc)) where numrow>=? and numrow<=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord.toLowerCase()+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				System.out.println(keyWord);
+				System.out.println(keyField);
+				System.out.println("검색");
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Boardbean bean = new Boardbean();
+				bean.setNum(rs.getInt("num"));
+				bean.setName(rs.getString("name"));
+				bean.setSubject(rs.getString("subject"));
+				bean.setPos(rs.getInt("pos"));
+				bean.setRef(rs.getInt("ref"));
+				bean.setDepth(rs.getInt("depth"));
+				bean.setRegdate(rs.getString("regdate"));
+				bean.setCount(rs.getInt("count"));
+				vlist.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+	
+	public Vector<Boardbean> getNoticeList(String keyField, String keyWord,int start, int end) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<Boardbean> vlist = new Vector<Boardbean>();
+		try {
+			con = pool.getConnection();
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from notice order by ref desc, pos asc)) where numrow>=? and numrow<=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, start);
+				pstmt.setInt(2, end);
+				
+				System.out.println("그냥");
+			} else {
+				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from notice where lower("+keyField+") like ? order by ref desc, pos asc)) where numrow>=? and numrow<=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyWord.toLowerCase()+"%");
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+				
+				System.out.println("검색");
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Boardbean bean = new Boardbean();
+				bean.setNum(rs.getInt("num"));
+				bean.setName(rs.getString("name"));
+				bean.setSubject(rs.getString("subject"));
+				bean.setPos(rs.getInt("pos"));
+				bean.setRef(rs.getInt("ref"));
+				bean.setDepth(rs.getInt("depth"));
+				bean.setRegdate(rs.getString("regdate"));
+				bean.setCount(rs.getInt("count"));
+				vlist.add(bean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+	
+	
+	//총 게시물수 board
+	public int getboardTotalCount(String keyField, String keyWord) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount = 0;
+		try {
+			con = pool.getConnection();
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				sql = "select count(num) from board";
+				pstmt = con.prepareStatement(sql);
+			} else {
+				sql = "select count(num) from  board where " + keyField + " like ? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + keyWord + "%");
+			}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	
+	public int getnoticeTotalCount(String keyField, String keyWord) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int totalCount = 0;
+		try {
+			con = pool.getConnection();
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				sql = "select count(num) from notice";
+				pstmt = con.prepareStatement(sql);
+			} else {
+				sql = "select count(num) from notice where " + keyField + " like ? ";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%" + keyWord + "%");
+			}
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				totalCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return totalCount;
+	}
+	
+	// 게시물 입력
+	public void insertBoard(HttpServletRequest req) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		MultipartRequest multi = null;
+		int filesize = 0;
+		String filename = null;
+		try {
+			multi = new MultipartRequest(req, SAVEFOLDER,MAXSIZE, ENCTYPE,new DefaultFileRenamePolicy());
+			con = pool.getConnection();
+			
+			if(multi.getParameter("name").equals("cwi7927")){
+				sql = "select max(num) from notice";
+			}else {
+				sql = "select max(num) from Board";
+			}
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int ref = 1;
+			if (rs.next()) {
+				ref = rs.getInt(1) + 1;
+			}
+			File file = new File(SAVEFOLDER);
+			if (!file.exists())
+				file.mkdirs();
+
+			if (multi.getFilesystemName("filename") != null) {
+				filename = multi.getFilesystemName("filename");
+				filesize = (int) multi.getFile("filename").length();
+			}
+			String content = multi.getParameter("content");
+			/*
+			 * if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) { content =
+			 * UtilMgr.replace(content, "<", "&lt;"); }
+			 */
+			if (multi.getParameter("name").equals("cwi7927")){
+				sql = "insert into notice(num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
+				sql += "values(num_seq_notice.nextval,?, ?, ?, ?, 0, 0, sysdate, ?, 0, ?, ?, ?)";
+			}else {
+				sql = "insert into board(num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
+				sql += "values(num_seq.nextval,?, ?, ?, ?, 0, 0, sysdate, ?, 0, ?, ?, ?)";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, multi.getParameter("name"));
+			pstmt.setString(2, content);
+			pstmt.setString(3, multi.getParameter("subject"));
+			pstmt.setInt(4, ref);
+			pstmt.setString(5, multi.getParameter("pass"));
+			pstmt.setString(6, multi.getParameter("ip"));
+			pstmt.setString(7, filename);
+			pstmt.setInt(8, filesize);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+	}
+	
+	
+	// 게시물 리턴
+	public Boardbean getBoard(int num,String boardtype) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Boardbean bean = new Boardbean();
+		try {
+			con = pool.getConnection();
+			if(boardtype.equals("공지사항")) {
+				sql = "select * from notice where num=?";
+			}else {
+				sql = "select * from board where num=?";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				bean.setNum(rs.getInt("num"));
+				bean.setName(rs.getString("name"));
+				bean.setSubject(rs.getString("subject"));
+				bean.setContent(rs.getString("content"));
+				bean.setPos(rs.getInt("pos"));
+				bean.setRef(rs.getInt("ref"));
+				bean.setDepth(rs.getInt("depth"));
+				bean.setRegdate(rs.getString("regdate"));
+				bean.setPass(rs.getString("pass"));
+				bean.setCount(rs.getInt("count"));
+				bean.setFilename(rs.getString("filename"));
+				bean.setFilesize(rs.getInt("filesize"));
+				bean.setIp(rs.getString("ip"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return bean;
+	}
+
+	// 조회수 증가
+	public void upCount(int num,String boardtype) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			if(boardtype.equals("공지사항")) {
+				sql = "update notice set count=count+1 where num=?";
+			}else {
+				sql = "update board set count=count+1 where num=?";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+
+	// 게시물 삭제
+	public void deleteBoard(int num,String boardtype) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		ResultSet rs = null;
+		try {
+			con = pool.getConnection();
+			if(boardtype.equals("공지사항")) {
+				sql = "select filename from notice where num = ?";
+			}else {
+				sql = "select filename from board where num = ?";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next() && rs.getString(1) != null) {
+				if (!rs.getString(1).equals("")) {
+					File file = new File(SAVEFOLDER + "/" + rs.getString(1));
+					if (file.exists())
+						UtilMgr.delete(SAVEFOLDER + "/" + rs.getString(1));
+				}
+			}
+			if(boardtype.equals("공지사항")) {
+				sql = "delete from notice where num=?";
+			}else {
+				sql = "delete from board where num=?";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+	}
+
+	// 게시물 수정
+	public void updateBoard(Boardbean bean,String boardtype) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			if(boardtype.equals("공지사항")) {
+				sql = "update notice set name=?,subject=?,content=? where num=?";
+			}else {
+				sql = "update board set name=?,subject=?,content=? where num=?";
+			}
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getSubject());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setInt(4, bean.getNum());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+
+	// 게시물 답변
+	public void replyBoard(Boardbean bean,String boardtype) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			if(boardtype.equals("공지사항")) {
+				sql = "insert into notice (num,name,content,subject,ref,pos,depth,regdate,pass,count,ip)";
+				sql += "values(num_seq.nextval,?,?,?,?,?,?,sysdate,?,0,?)";
+			}else {
+				sql = "insert into board (num,name,content,subject,ref,pos,depth,regdate,pass,count,ip)";
+				sql += "values(num_seq.nextval,?,?,?,?,?,?,sysdate,?,0,?)";
+			}
+			
+			int depth = bean.getDepth() + 1;
+			int pos = bean.getPos() + 1;
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getContent());
+			pstmt.setString(3, bean.getSubject());
+			pstmt.setInt(4, bean.getRef());
+			pstmt.setInt(5, pos);
+			pstmt.setInt(6, depth);
+			pstmt.setString(7, bean.getPass());
+			pstmt.setString(8, bean.getIp());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+
+	// 답변에 위치값 증가
+	public void replyUpBoard(int ref, int pos) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "update board set pos = pos + 1 where ref=? and pos > ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, pos);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+
+	//파일 다운로드
+		public void downLoad(HttpServletRequest req, HttpServletResponse res,
+				JspWriter out, PageContext pageContext) {
+			try {
+				String filename = req.getParameter("filename");
+				File file = new File(UtilMgr.con(SAVEFOLDER + File.separator+ filename));
+				byte b[] = new byte[(int) file.length()];
+				res.setHeader("Accept-Ranges", "bytes");
+				String strClient = req.getHeader("User-Agent");
+				if (strClient.indexOf("MSIE6.0") != -1) {
+					res.setContentType("application/smnet;charset=UTF-8");
+					res.setHeader("Content-Disposition", "filename=" + filename + ";");
+				} else {
+					res.setContentType("application/smnet;charset=UTF-8");
+					res.setHeader("Content-Disposition", "attachment;filename="+ filename + ";");
+				}
+				out.clear();
+				out = pageContext.pushBody();
+				if (file.isFile()) {
+					BufferedInputStream fin = new BufferedInputStream(
+							new FileInputStream(file));
+					BufferedOutputStream outs = new BufferedOutputStream(
+							res.getOutputStream());
+					int read = 0;
+					while ((read = fin.read(b)) != -1) {
+						outs.write(b, 0, read);
+					}
+					outs.close();
+					fin.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	//페이징 및 블럭 테스트를 위한 게시물 저장 메소드 
+	public void post1000(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		try {
+			con = pool.getConnection();
+			sql = "insert board(name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize)";
+			sql+="values('aaa', 'bbb', 'ccc', 0, 0, 0, sysdate, '1111',0, '127.0.0.1', null, 0);";
+			pstmt = con.prepareStatement(sql);
+			for (int i = 0; i < 1000; i++) {
+				pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+	
+	//main
+	public static void main(String[] args) {
+		new BoardDAO().post1000();
+		System.out.println("SUCCESS");
+	}
+	
+	//날짜 수신
+	public String getDate() {
+		String SQL = "SELECT TO_CHAR(SYSDATE, YYYY-MM-DD HH24:MI:SS) FROM DUAL";
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ""; // 데이터베이스 오류
+	}
+
+	// bbsID 게시글 번호 가져오는 함수
+	public int getNext() {
+		String SQL = "SELECT BBSNUMBER FROM BOARD ORDER BY BBSNUMBER DESC";
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(2) + 1;
+			} // rs.getInt(1)의 값 : 실행된 쿼리문에서 첫번째의 값
+			return 1;// 첫 번째 게시물인 경우
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 데이터베이스 오류
+	}
+
+	// 실제로 글을 작성하는 함수
+	public int write(String bbsTitle, String userID, String bbsContent) {
+		String SQL = "INSERT INTO BOARD VALUES(?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		ResultSet rs = null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID); // userid
+			pstmt.setInt(2, getNext()); // bbsnumber
+			pstmt.setString(3, getDate()); // bbsdate
+			//4번은 write type인데 아직 없음
+			pstmt.setString(5, bbsTitle); // title
+			pstmt.setString(6, bbsContent); // content
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1; // 데이터베이스 오류
+	}
+}

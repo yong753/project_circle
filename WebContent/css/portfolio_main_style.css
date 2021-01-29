@@ -1,0 +1,140 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+#core{
+	min-height: 100%;
+}
+
+#main >div{
+	margin: 25px 0px 0px 0px;
+}
+
+/*upper------------------------------------*/
+
+#upper-title {
+    margin-top: 30px;
+}
+
+#upper-title div p {
+    width: 300px;
+}
+
+#upper {
+    margin-top: 0px;
+    background-color: gray;
+    border-radius: 30px;
+}
+
+#upper > div > #weather-info {
+    border-radius: 30px;
+    height: 400px;
+    width: 400px;
+    margin: 30px auto;
+    border: none;
+    box-sizing: border-box;
+    color: white;
+    font-size: 23px;
+	background: linear-gradient(39deg,#00b4db, #0083b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#upper > div > #weather-info > .today > .tweather > .icon{
+    display: block;
+}
+
+#upper > div > #weather-info > .today > .tweather > div:nth-of-type(2){
+	margin-left: 0px;
+	margin-bottom: 30px;
+    text-transform: capitalize;
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+#upper > div > #weather-info > .today > .tweather > div:nth-of-type(2) ~ div{
+	margin-left: 20px;
+	margin-bottom: 20px;
+    text-transform: capitalize;
+    font-size: 22px;
+    display: inline-block;
+    text-align: left;
+    font-weight: bold;
+    width: 170px;
+}
+
+#upper > div > #weather-info > .today > .tweather > .icon > img {
+    display: block;
+    width: 40%;
+    height: 40%;
+    margin: auto;
+}
+
+#upper > #most-recommended{
+	margin-top: 30px;
+}
+
+#upper > #most-recommended > .desc > .title {
+    color: white;
+    font-size: 15px;
+}
+
+#upper > #most-recommended > .desc > .etc {
+    color: gray;
+    font-size: 15px;
+}
+
+#upper #most-recommended p {
+    margin-top: 9px;
+}
+
+
+/*lower------------------------------------*/
+#lower1-title,#lower2-title ,#lower3-title ,#lower4-title{
+    margin-top: 30px;
+}
+
+#lower1-title > p,#lower2-title > p,#lower3-title > p ,#lower4-title > p{
+	width: 600px;
+} 
+
+#lower1,#lower2,#lower3,#lower4 {
+    margin-bottom: 30px;
+}
+
+#lower1 div a .section,#lower2 div a .section,#lower3 div a .section,#lower4 div a .section{
+    width: 220px;
+    height: 260px;
+}
+
+#lower1 > div >a >img,#lower2 > div >a >img,#lower3 > div >a >img,#lower4 > div >a >img{
+    width: 220px;
+    height: 220px;
+}
+
+#main > #lower4{
+	margin-bottom: 100px;
+}
+
+.desc > .title {
+    color: white;
+	width:220px;
+	height: 60px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* ���μ� */
+	-webkit-box-orient: vertical;
+	word-wrap:break-word; 
+	line-height: 30px;
+	vertical-align: bottom;
+	padding-top: 5px;
+	font-size: 20px;
+}
+
+
+.desc > .etc {
+    color: gray;
+    font-size: 15px;
+}

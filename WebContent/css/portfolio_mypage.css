@@ -1,0 +1,122 @@
+#mypage-menu{
+    height: 960px;
+}
+
+#mypage-menu fieldset{
+    border: 1px solid white;
+    width: 900px;
+    margin: 0 auto;
+    margin-top: 200px;
+    text-align: center;
+    border-radius: 20px;
+    padding-top: 30px;
+}
+
+#mypage-menu fieldset legend p{
+    color: dodgerblue;
+}
+
+#mypage-menu > fieldset > a >p{
+    margin-left: 70px;
+    color: dodgerblue;
+    margin-bottom: 0px;
+    vertical-align: center;
+}
+
+#mypage-menu > fieldset > form > table{
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td{
+	height: 50px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td:first-of-type{
+	width: 100px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td:nth-of-type(2){
+	width: 400px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td:nth-of-type(3){
+	width: 150px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td > input{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td > a > input{
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td > p{
+	font-size: 20px;
+	color: white;
+	vertical-align: center;
+	margin-bottom: 0px;
+	margin-top: 10px;
+}
+
+#mypage-menu > fieldset > form > table > tbody > tr > td > .postcodify_address{
+	border: none;
+	background-color: transparent;
+	color: white;
+	width: 400px;
+	margin: 0px;
+} 
+
+#mypage-menu > fieldset > form > table > tbody > tr > td > .postcodify_details{
+	width: 165px;
+	border: none;
+	background-color: transparent;
+	color: white;
+	margin: 0px;
+}
+
+#submit_button{
+	display: inline-block;
+	width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    position: relative;
+    top: 2px;
+}
+
+#cancel_button{
+	display: inline-block;
+	width: 150px;
+    height: 50px;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    border: none;
+    margin-left: 50px;
+    margin-bottom: 50px;
+}
+
+#cancel_button > p{
+	font-size: 20px;
+	color:white;
+    font-weight: bold;
+    line-height: 50px;
+    vertical-align: center;
+    text-align: center;
+}
+
+
+
+
+

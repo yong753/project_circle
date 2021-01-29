@@ -1,0 +1,172 @@
+
+.container_12{
+	background : linear-gradient( to bottom, #000000, #434343);
+}
+
+/* chart------------------------------------------------------- */
+
+
+.chart > li{
+	border: 1px solid gray;
+	border-radius : 30px;
+	vertical-align : middle;
+	height: 100px;
+	list-style: none;
+	margin: 20px 0px;
+}
+
+.chart li div{
+	position: relative;
+	display: inline-block;
+}
+
+.chart li div:first-of-type{
+	top: -60px;
+}
+
+.chart li div:first-of-type a {
+	position: relative;
+}
+
+.chart li div:first-of-type a img{
+	width: 80px;
+	height: 80px;
+	margin: 10px;
+}
+
+.chart li div:nth-of-type(2){
+	width: 400px;
+	height: 100px;
+}
+
+.chart li div:nth-of-type(2) > p:first-of-type, .chart li div:nth-of-type(2) > p:nth-of-type(3){
+	width: 400px;
+	margin: 5px 0px;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: bottom;
+}
+
+.chart li div:nth-of-type(2) > p:nth-of-type(2){
+	width: 400px;
+	margin: 5px 0px;
+	height: 30px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* ¶óÀÎ¼ö */
+	-webkit-box-orient: vertical;
+	word-wrap:break-word; 
+	line-height: 17.5px;
+	vertical-align: bottom;
+}
+
+.chart li div:nth-of-type(3){
+	width: 100px;
+	height: 100px;
+	float: right;
+	display: relative;
+	vertical-align: center;
+}
+
+.chart li div:nth-of-type(3) a{
+	display: inline-block;
+	width: 90px;
+	height: 35px;
+	vertical-align: center;
+	margin-top: 30px;
+}
+
+#like-button,#play-button{
+  font-size: 1.5em;
+  font-family: 'Heebo', sans-serif;
+  background-color: transparent;
+  border: 0.1em solid;
+  border-radius: 1em;
+  padding: 0.333em 1em 0.25em;
+  cursor: pointer;
+  outline: 0;
+  color: white;
+  }
+  
+  #like-button.selected {
+    color: white;
+    background-color: red;
+    border-color: red;
+  }
+
+/* theme------------------------------------------------------- */
+
+#theme > div > ul{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#theme > div > ul > li{
+	height: 100px;
+	margin: 20px;
+	display: inline-block;
+	position: relative;
+}
+
+#theme > div > ul > li > a{
+	position: relative;
+	top: -40px;
+}
+
+#theme > div > ul > li > a > p {
+	position: relative;
+	display: block;
+	width: 100px;
+	color: white;
+	top: 70px; 
+	left: 20px;
+	z-index: 1;
+}
+
+#theme > div > ul > li > a > img{
+	width: 180px;
+	height: 100px;
+	border-radius: 20px;
+	z-index: 0;
+}
+
+
+
+/* genre------------------------------------------------------- */
+
+
+#genre > div > ul{
+	margin: 0 auto;
+	text-align: center;
+}
+
+#genre > div > ul > li{
+	height: 100px;
+	margin: 20px;
+	display: inline-block;
+	position: relative;
+}
+
+#genre > div > ul > li > a{
+	position: relative;
+	top: -40px;
+}
+
+#genre > div > ul > li > a > p {
+	position: relative;
+	display: block;
+	width: 100px;
+	color: white;
+	top: 70px; 
+	left: 20px;
+	z-index: 1;
+}
+
+#genre > div > ul > li > a > img{
+	width: 180px;
+	height: 100px;
+	border-radius: 20px;
+	z-index: 0;
+}

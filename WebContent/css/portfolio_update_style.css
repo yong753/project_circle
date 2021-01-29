@@ -1,0 +1,59 @@
+
+#main{
+	min-height: 1010px;
+}
+
+body > div > div > h1{
+	color: white;
+}
+
+#maintable{
+	width: 950px;
+	background-color: white;
+   	border-collapse: collapse;
+  	border-spacing: 1px;
+  	text-align: center;
+  	line-height: 1.5;
+  	margin: 20px 0px;
+}
+
+#maintable > tbody td {
+  	font-size: 15px;
+	padding: 10px;
+	border-bottom: 1px solid gray;
+	text-align: left;
+}
+
+#maintable > tbody > tr:first-of-type > td {
+  	font-size: 15px;
+  	font-weight: bold;
+  	color: black;
+  	background-color: gray;
+}
+
+
+#maintable > tbody > tr:first-of-type > td > input {
+	border: none;
+	background: gray;
+	font-size: 15px;
+}
+
+#maintable > tbody > tr:nth-of-type(2) > td {
+  	font-size: 15px;
+  	font-weight: bold;
+  	color: black;
+}
+
+#maintable > tbody > tr:nth-of-type(2) > td > input{
+  	width: 780px;
+}
+
+#maintable td:first-of-type{
+	text-align: center;
+	font-size: 12px;
+}
+#maintable tr > td > input , #maintable tr > td > textarea{
+	box-sizing: border-box;
+}
+
+

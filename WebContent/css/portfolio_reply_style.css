@@ -1,0 +1,51 @@
+
+#main{
+	background : linear-gradient( to top, #000000, #434343);
+	min-height: 100%;
+}
+
+body > div > div > h1{
+	color: white;
+	font-size: 20px; 
+}
+
+#maintable{
+	border: 1px solid white;
+	border-collapse: collapse;
+	background-color: black;
+	color: white;
+	margin: 0 auto;
+	padding: 10px;
+}
+#maintable{
+	border: 1px solid white;
+	border-collapse: collapse;
+}
+
+#maintable td:first-of-type{
+	text-align: center;
+	font-size: 12px;
+}
+
+#maintable tr > td > input , #maintable tr > td > textarea{
+	width: 450px;
+	box-sizing: border-box;
+}
+
+#maintable tr:first-of-type > td > input{
+	width: 150px;
+}
+
+#maintable tr:nth-of-type(4) > td > input{
+	width: 150px;
+}
+
+#maintable tr:nth-of-type(5) > td > input{
+	width: 60px;
+	height: 20px;
+	font-size: 12px;
+	text-align: center;
+	padding: 0px;
+}
+
+

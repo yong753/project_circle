@@ -1,0 +1,49 @@
+/* 공통부분 */
+#search > div > a > img, #most > div > a > img{
+	width: 220px;
+	height: 220px;
+}
+
+#search > div > .desc > .title, #most > div > .desc > .title{
+    color: white;
+	width:220px;
+	height: 60px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	word-wrap:break-word; 
+	line-height: 30px;
+	vertical-align: bottom;
+	padding-top: 5px;
+	font-size: 20px;
+}
+
+#personal{
+	height: 1010px;
+}
+
+/* search */
+
+#search{
+    overflow: hidden;
+}
+
+
+#search > div > a{
+	display: block;
+	width: 220px;
+	height: 220px;
+	overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+

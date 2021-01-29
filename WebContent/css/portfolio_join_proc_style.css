@@ -1,0 +1,48 @@
+#login-menu{
+    margin-top: 30px;
+    height: 960px;
+}
+
+#login-menu > fieldset > p:first-of-type{
+	display: block;
+    margin: 0 auto;
+    width: 500px;
+    font-size: 17px;
+    color: white;
+    text-align: center;
+}
+
+#login-menu p{
+    display: block;
+    width: 350px;
+    margin-left:100px;
+    margin-bottom: 0px;
+    font-size: 17px;
+    color: white;
+}
+#login-menu > fieldset{
+    width: 500px;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+#login-menu > fieldset>legend>p{
+    font-size: 20px;
+    display: inline;
+    margin-left: 0px;
+}
+ 
+#login-menu > fieldset > form > input{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+} 

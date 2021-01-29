@@ -1,0 +1,36 @@
+#find-menu{
+    height: 960px;
+}
+
+#find-menu > fieldset{
+    padding-left: 50px;
+    padding-bottom: 50px;
+    border: 1px solid white;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 20px;
+}
+#find-menu > fieldset > h6{
+    font-size: 17px;
+    color: grey;
+}
+
+#find-menu > fieldset >form input{
+	width: 300px;
+    height: 40px;
+    font-size: 20px;
+    margin: 5px;
+}
+
+#find-menu > fieldset >form > input:nth-of-type(4){
+    width: 120px;
+    height: 50px;
+    font-size: 15px;
+    background-color: dodgerblue;
+    color:white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    display: inline-block;
+   
+}
