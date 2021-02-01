@@ -1,5 +1,17 @@
+<%@page import="basic.ThumbJsonParser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	ThumbJsonParser thumb = new ThumbJsonParser();
+
+	String mostrecommendedurl = (String)session.getAttribute("mostrecommendedurl");
+	String thumburl = thumb.getJson("https://www.googleapis.com/youtube/v3/playlists?id=" + mostrecommendedurl
+	+ "&part=snippet&key=AIzaSyAsVcJ5GPv9TsnxV_PGNQkRe368-2hujQ4");
+
+	//검토
+	System.out.print("푸터1" + mostrecommendedurl);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,37 +34,62 @@
 </head>
 
 <body>
-		<div id="player">
-		    <script>
-		      // 2. This code loads the IFrame Player API code asynchronously.
-		      var tag = document.createElement('script');
-		      tag.src = "https://www.youtube.com/iframe_api";
-		      
-		      var firstScriptTag = document.getElementsByTagName('script')[0];
-		      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-		
-		      // 3. This function creates an <iframe> (and YouTube player)
-		      //    after the API code downloads.
-		      var player;
-		      function onYouTubeIframeAPIReady() {
-		        player = new YT.Player('player', {
-		          height: '300',
-		          width: '300',
-		          playerVars: {
-		        	'autoplay': 1,
-		        	'listType': 'playlist',
-		        	'list': 'PLSj7ATinfRH0BrXMbZU8IMvGlhf2ad51q'
-		          },
-		          events: {
-		              'onReady': onPlayerReady,
-		          }
-		        });
-		      }
-		      
-		      function onPlayerReady(event) {
-		          event.target.playVideo();
-		        }
-		    </script>
+	<div id="palyer-area">
+		<div id="player"></div>
+	</div>
+	<div id="footer">
+		<div id="left-controller">
+			<button type="button" onclick="prevsong();">이전</button>
+			<button type="button" onclick="playsong();">재생</button>
+			<button type="button" onclick="nextsong();">다음</button>
+		</div>
+		<div id="middle-controller">
+			<img src="<%=thumburl%>">
+		</div>
+	    <div id="right-controller">
+		   <a href="#">셔플</a>
+		   <a href="#">볼륨</a>
+		   <a href="#">플레이어열기</a>
 	    </div>
+    </div>
 </body>
+<script>
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+       	  playerVars: {
+	        	autoplay: '1',
+	        	listType: 'playlist',
+	        	list: '<%=mostrecommendedurl%>',
+	      }
+        });
+      }
+      
+      function playsong(){
+    	  if(player.getPlayerState() == 1){
+    		  player.pauseVideo();
+    	  }else{
+    		  player.playVideo();
+    	  }
+   		  console.log(player.getPlayerState());
+      }
+      
+      function prevsong(){
+    	  player.previousVideo();
+      }
+      
+      function nextsong(){
+   		  player.nextVideo();
+      }
+      
+</script>
 </html>
+

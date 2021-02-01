@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    
 <%
 	request.setCharacterEncoding("EUC-KR");
 	String id = (String)session.getAttribute("idKey");
@@ -28,7 +27,6 @@
                 <legend>
                     <p>로그인</p>
                 </legend>
-                
                 <p>로그인 되었습니다.</p>
                 <p><%=id %>님 환영합니다.</p>
                 <a href="goto_action.do?location=main_load.do">

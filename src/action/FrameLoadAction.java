@@ -1,8 +1,8 @@
 package action;
 
 import java.io.IOException;
-import java.lang.Exception;
 import java.util.List;
+import java.lang.Exception;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import dao.ListDAO;
+import dao.TagDAO;
 import basic.WeatherJsonParser;
 import bean.Listbean;
-import dao.ListDAO;
-import dao.MemberDAO;
+import bean.MostRecommendedbean;
+import bean.RecentAddedListbean;
+import bean.TagListbean;
+import bean.WeatherListbean;
 
-public class MemberLogoutAction implements Action{
+public class FrameLoadAction implements Action{
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//세션만료
-		HttpSession session = request.getSession();
-		session.removeAttribute("idKey");
-		
 		//기본객체 생성
+		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String id = (String)session.getAttribute("idKey");
 		String url = "/circle_frame.jsp";
@@ -55,7 +57,6 @@ public class MemberLogoutAction implements Action{
 		
 		//request 및 response 설정
 		session.setAttribute("mostrecommendedurl", mostrecommendedurl);
-		request.setAttribute("mostrecommended", mainsrc);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);

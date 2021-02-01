@@ -31,7 +31,7 @@ public class LibraryLoadAction implements Action{
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String id = (String)session.getAttribute("idKey");
-		String url = "/portfolio_library.jsp";
+		String url = "/circle_library.jsp";
 		
 		//로그인 여부 체크
 		if (id == null) {
@@ -41,7 +41,7 @@ public class LibraryLoadAction implements Action{
 			outs.flush();
 		}
 		
-		//차트 관련 객체 생성
+		//List 관련 객체 생성
 		Listbean data = new Listbean();
 		List<Listbean> recentlist = new ArrayList<Listbean>();
 		List<Listbean> likedlist = new ArrayList<Listbean>();

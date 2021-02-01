@@ -18,6 +18,7 @@ import action.BoardUpdateAction;
 import action.BoardWriteAction;
 import action.BoardWriteLoadAction;
 import action.ChartLoadAction;
+import action.FrameLoadAction;
 import action.GotoAction;
 import action.LibraryLoadAction;
 import action.LoginLoadAction;
@@ -31,6 +32,7 @@ import action.MemberPasswordCheckAction;
 import action.MemberUpdateAddressAction;
 import action.MemberUpdatePasswordAction;
 import action.PlayerLoadAction;
+import action.SearchAction;
 import action.SearchLoadAction;
 
 // *.do Ȯ���ڸ� ��� ó���ϰڴٰ� ���
@@ -54,7 +56,6 @@ import action.SearchLoadAction;
 		
 		private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("actionDo");
-			
 			String uri = request.getRequestURI();
 			System.out.println("uri : " + uri);
 			String conPath = request.getContextPath();
@@ -64,8 +65,12 @@ import action.SearchLoadAction;
 			
 			Action action = null;
 			
+			//Frame Load 액션
+			if(command.equals("/frame_load.do")){
+				action = new FrameLoadAction();
+			}
 			//Load 액션
-			if(command.equals("/main_load.do")){
+			else if(command.equals("/main_load.do")){
 				action = new MainLoadAction();
 			}else if(command.equals("/chart_load.do")) {
 				action = new ChartLoadAction();
@@ -86,7 +91,6 @@ import action.SearchLoadAction;
 			else if(command.equals("/goto_action.do")) {
 				action = new GotoAction();
 			}
-			
 			//board 액션
 			else if(command.equals("/board_read_load.do")) {
 				action = new BoardReadAction();
@@ -127,6 +131,8 @@ import action.SearchLoadAction;
 				action = new SearchLoadAction();
 			}else if(command.equals("/basic_location.do")) {
 				action = new BasicLocationAction();
+			}else if(command.equals("/search_action.do")) {
+				action = new SearchAction();
 			}
 			action.execute(request,response);
 		}

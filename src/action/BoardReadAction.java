@@ -34,7 +34,7 @@ public class BoardReadAction implements Action{
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String id = (String)session.getAttribute("idKey");
-		String url = "/portfolio_board_read.jsp";
+		String url = "/circle_board_read.jsp";
 		
 		//로그인 여부 체크
 		if (id == null) {

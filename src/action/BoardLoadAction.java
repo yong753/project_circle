@@ -34,15 +34,7 @@ public class BoardLoadAction implements Action{
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String id = (String)session.getAttribute("idKey");
-		String url = "/portfolio_board.jsp";
-		
-		//로그인 여부 체크
-		if (id == null) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter outs = response.getWriter();
-			outs.println("<script>alert('로그인 해주세요.'); location.href='main_load.do';</script>");
-			outs.flush();
-		}
+		String url = "/circle_board.jsp";
 		
 		//개시판 객체 생성
 		int totalRecord = 0; //전체레코드수

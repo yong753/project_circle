@@ -33,14 +33,6 @@ public class ChartLoadAction implements Action{
 		String id = (String)session.getAttribute("idKey");
 		String url = "/circle_chart.jsp";
 		
-		//로그인 여부 체크
-		if (id == null) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter outs = response.getWriter();
-			outs.println("<script>alert('로그인 해주세요.'); location.href='main_load.do';</script>");
-			outs.flush();
-		}
-		
 		//차트 관련 객체 생성
 		String chartduration = request.getParameter("chartduration");
 		Listbean data = new Listbean();

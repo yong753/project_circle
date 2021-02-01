@@ -15,9 +15,9 @@ import dao.MemberDAO;
 
 public class MemberLoginAction implements Action{
 	
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
+		HttpSession session = request.getSession();
 		String url = "/circle_frame.jsp";
 		String location = "login_success_load.do";
 		
@@ -31,18 +31,14 @@ public class MemberLoginAction implements Action{
 		//아이디 비밀번호 체크
 		if(id!=null&&pw!=null) {
 			if(mem.loginCheck(id,pw)) {
-				HttpSession session = request.getSession();
 				session.setAttribute("idKey", id);
 				request.setAttribute("location", location);
 				
 				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 				dispatcher.forward(request,response);
-				 
 			}else {
-				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('아이디와 비밀번호를 확인하세요.'); location.href='portfolio_login.jsp';</script>");
-				out.flush();
+				out.println("<script>alert('아이디와 비밀번호를 확인하세요.');</script>");
 			};
 		}
 	}

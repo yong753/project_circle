@@ -71,7 +71,17 @@ public class ListDAO {
 		
 	try {
 		con = pool.getConnection();
-		sql = "select url,title from (select url,title,rownum from (select url,title,count(*) from (select a.url,a.title,a.weather,b.count from playlist_total a, playlist_member b where a.url = b.url and a.weather like ? and to_char(b.adddate,'YYYYMMDD') >= to_char(sysdate,'YYYYMMDD')-7) group by url,title order by count(*) desc) where rownum<=4) order by dbms_random.random";
+		sql = "select url,title "
+				+ "from (select url,title,rownum "
+				+ "from (select url,title,count(*) "
+				+ "from (select a.url,a.title,a.weather,b.count "
+				+ "from playlist_total a, playlist_member b "
+				+ "where a.url = b.url "
+				+ "and a.weather like ? and to_char(b.adddate,'YYYYMMDD') >= to_char(sysdate,'YYYYMMDD')-7) "
+				+ "group by url,title "
+				+ "order by count(*) desc) "
+				+ "where rownum<=4) order by dbms_random.random";
+		
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1,"'%"+weather+"%'");
 		rs = pstmt.executeQuery();
@@ -167,7 +177,7 @@ public class ListDAO {
 			}
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("¿À·ù");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
@@ -202,7 +212,7 @@ public class ListDAO {
 			}
 		} catch (Exception e) {
 			e.getMessage();
-			System.out.println("¿À·ù");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
@@ -217,7 +227,7 @@ public class ListDAO {
 		ResultSet rs = null;
 		String sql = null;
 		List<Listbean> list = null;
-		System.out.println("µ¥ÀÏ¸®Â÷Æ® ÁøÀÔ");
+		System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
 
 		try {
 			con = pool.getConnection();
@@ -225,7 +235,7 @@ public class ListDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			System.out.println("µ¥ÀÏ¸®Â÷Æ® ÁøÀÔ2");
+			System.out.println("ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½2");
 			
 			if (rs.next()) {
 				list = new ArrayList<Listbean>();
@@ -252,7 +262,7 @@ public class ListDAO {
 		ResultSet rs = null;
 		String sql = null;
 		List<Listbean> list = null;
-		System.out.println("À§Å¬¸®Â÷Æ® ÁøÀÔ");
+		System.out.println("ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½");
 
 		try {
 			con = pool.getConnection();
@@ -260,7 +270,7 @@ public class ListDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			System.out.println("À§Å¬¸®Â÷Æ® ÁøÀÔ2");
+			System.out.println("ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½2");
 			
 			if (rs.next()) {
 				list = new ArrayList<Listbean>();
@@ -309,11 +319,11 @@ public class ListDAO {
 		} 
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("¿À·ù");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½");
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return click; //false ÀÌ¸é 'ÁÁ¾Æ¿ä' ´©¸£Áö ¾ÊÀº »óÅÂ
+		return click; //false ï¿½Ì¸ï¿½ 'ï¿½ï¿½ï¿½Æ¿ï¿½' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 	
 	public List<Listbean> getrecentList(String id, int startnum, int endnum) {
@@ -323,7 +333,7 @@ public class ListDAO {
 		ResultSet rs = null;
 		String sql = null;
 		List<Listbean> list = null;
-		System.out.println("recentlist ÁøÀÔ1");
+		System.out.println("recentlist ï¿½ï¿½ï¿½ï¿½1");
 
 		try {
 			con = pool.getConnection();
@@ -335,7 +345,7 @@ public class ListDAO {
 			pstmt.setInt(3, startnum);
 			pstmt.setInt(4, endnum);
 			rs = pstmt.executeQuery();
-			System.out.println("recentlist ÁøÀÔ2");
+			System.out.println("recentlist ï¿½ï¿½ï¿½ï¿½2");
 
 			if (rs.next()) {
 				list = new ArrayList<Listbean>();
@@ -362,10 +372,10 @@ public class ListDAO {
 		ResultSet rs = null;
 		String sql = null;
 		List<Listbean> list = null;
-		System.out.println("listmgrÁøÀÔ");
+		System.out.println("listmgrï¿½ï¿½ï¿½ï¿½");
 		
 		try {
-			System.out.println("listmgr½ÃÀÛ1");
+			System.out.println("listmgrï¿½ï¿½ï¿½ï¿½1");
 			con = pool.getConnection();
 			sql = "select listtitle,url from (select listtitle,url,adddate from favorite where userid=? and likes=1 order by adddate desc) where rownum>=? and rownum<=? order by rownum asc";
 			
@@ -374,11 +384,11 @@ public class ListDAO {
 			pstmt.setInt(2, startnum);
 			pstmt.setInt(3, endnum);
 			rs = pstmt.executeQuery();
-			System.out.println("listmgr½ÃÀÛ2");
+			System.out.println("listmgrï¿½ï¿½ï¿½ï¿½2");
 
 			if (rs.next()) {
 				list = new ArrayList<Listbean>();
-				System.out.println("listmgr¼º°ø");
+				System.out.println("listmgrï¿½ï¿½ï¿½ï¿½");
 				do {
 					Listbean data = new Listbean();
 					data.setTitle(rs.getString("listtitle"));

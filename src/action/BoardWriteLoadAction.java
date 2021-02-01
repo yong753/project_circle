@@ -32,9 +32,7 @@ public class BoardWriteLoadAction implements Action{
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		BoardDAO bDAO = new BoardDAO();
-		bDAO.insertBoard(request);
-		response.sendRedirect("board_load.do");
+		response.sendRedirect("circle_board_write.jsp");
 	}
 	
 }
