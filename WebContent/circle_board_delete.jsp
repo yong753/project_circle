@@ -3,21 +3,20 @@
 <%
 	String nowPage = request.getParameter("nowPage");
 	int num = Integer.parseInt(request.getParameter("num"));
+	
+	request.setCharacterEncoding("UTF-8");
+	String alertmsg = (String)request.getAttribute("alert");
 %>
 
 <html>
 <head>
 <title>JSP Board</title>
 <link href="style.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
-	function check(){
-		if (document.delFrm.pass.value == "") {
-			alert("패스워드를 입력하세요.");
-			document.delFrm.pass.focus();
-			return false;
-		}
-		document.delFrm.submit();
-	}
+	<%if(alertmsg != null){%>
+		alert("<%=alertmsg%>");
+	<%}%>
 </script>
 </head>
 <body class="body">
@@ -45,7 +44,7 @@
 							</tr>
 							<tr>
 								<td align="center">
-									<input type="button" value="삭제완료" onClick="check()"> 
+									<input id="submit_button" type="button" value="삭제완료"> 
 									<input type="reset" value="다시쓰기">
 									<input type="button" value="뒤로" onClick="history.go(-1)">
 								</td>
@@ -59,4 +58,19 @@
 		</form>
 	</div>
 </body>
+<script>
+	//글 등록
+	$(document).on("click","#submit_button",function(){
+		if (document.delFrm.pass.value == "") {
+			alert("패스워드를 입력하세요.");
+			document.delFrm.pass.focus();
+			return false;
+		}
+		
+		var formdata = $("form[name='delFrm']").serialize();
+		
+		$('#mainframe').empty;
+       	$('#mainframe').load("board_delete.do",{"formdata": formdata});
+    })
+</script>
 </html>

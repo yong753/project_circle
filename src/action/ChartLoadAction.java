@@ -34,27 +34,20 @@ public class ChartLoadAction implements Action{
 		String url = "/circle_chart.jsp";
 		
 		//차트 관련 객체 생성
-		String chartduration = request.getParameter("chartduration");
 		Listbean data = new Listbean();
-		List<Listbean> chartlist = new ArrayList<Listbean>();
+		List<Listbean> dchartlist = new ArrayList<Listbean>();
+		List<Listbean> wchartlist = new ArrayList<Listbean>();
 		
 		//ListDAO 객체 생성
 		ListDAO lDAO = new ListDAO();
 		
 		//일간, 주간차트 결정 및 list 생성
-		if(chartduration != null){
-			if(chartduration.equals("weekly")){
-				chartlist = lDAO.getweeklychartList(1, 20);
-			}else{
-				chartlist = lDAO.getdailychartList(1, 20);
-			}
-		}else{
-			chartlist = lDAO.getdailychartList(1, 20);
-		}
+		dchartlist = lDAO.getdailychartList(1, 20);
+		wchartlist = lDAO.getweeklychartList(1, 20);
 		
 		//request 및 response 설정
-		request.setAttribute("chartlist", chartlist);
-		request.setAttribute("chartduration", chartduration);
+		request.setAttribute("dchartlist", dchartlist);
+		request.setAttribute("wchartlist", wchartlist);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,response);

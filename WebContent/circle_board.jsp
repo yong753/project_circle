@@ -43,13 +43,13 @@
 
 <script type="text/javascript">
 	function list() {
-		document.listFrm.action = "board_load.do";
-		document.listFrm.submit();
+		$('#mainframe').empty;
+		$('#mainframe').load("board_load.do",{"nowPage": "1" , "reload": "true", "boardtype": "<%=boardtype%>"});
 	}
 
 	function pageing(page) {
-		document.readFrm.nowPage.value = page;
-		document.readFrm.submit();
+		$('#mainframe').empty;
+		$('#mainframe').load("board_load.do",{"nowPage": page , "reload": "true", "boardtype": "<%=boardtype%>"});
 	}
 
 	function block(value) {
@@ -59,8 +59,10 @@
 
 	function read(num) {
 		document.readFrm.num.value = num;
-		document.readFrm.action = "board_read_load.do";
-		document.readFrm.submit();
+		/* var formdata = $("form[name=readFrm]").serialize() ; */
+
+		$('#mainframe').empty;
+		$('#mainframe').load("board_read_load.do",{"num": num ,"nowPage": "<%=nowPage%>"});
 	}
 
 	function check() {
@@ -82,12 +84,19 @@
 			<p>
 				Total : <%=totalRecord%>Articles(<font color="red"><%=nowPage%>/<%=totalPage%>Pages</font>)
 			</p>
-			<form method="post" action="board_load.do" name="notice">
+			<a class="location" value="board_load.do?boardtype=공지사항" href="#">
+				<p>공지사항</p>
+			</a>
+			<a class="location" value="board_load.do?boardtype=자유게시판" href="#">
+				<p>자유게시판</p>
+			</a>
+			<!-- <form method="post" action="board_load.do" name="notice">
 				<input class="boardtype_button" type="submit" name="boardtype" value="공지사항">
 			</form>
 			<form method="post" action="board_load.do" name="board">
 				<input class="boardtype_button" type="submit" name="boardtype" value="자유게시판">
-			</form>
+			</form> -->
+			
 			<table align="center" width="600" cellpadding="3">
 				<tr>
 					<td align="center" colspan="2">
@@ -174,7 +183,7 @@
  <!-- 페이징 및 블럭 처리 End-->
 					</td>
 					<td id="write-menu" align="right">
-						<a href="#" class="location" value="board_write_load.do">
+						<a class="location" value="board_write_load.do" href="#" >
 							[글쓰기]
 						</a> 
 						<a href="javascript:list()">

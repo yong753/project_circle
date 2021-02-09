@@ -55,7 +55,6 @@
 						for (int i = 0; i < recentlist.size(); i++) {
 							playlisturl[i] = recentlist.get(i).getUrl();
 							title[i] = recentlist.get(i).getTitle();
-							address_url[i] = "player_load.do?url=" + playlisturl[i] + "&title=" + title[i];
 						}
 						for (int i = 0; i < recentlist.size(); i++) {
 							ThumbJsonParser aaa = new ThumbJsonParser();
@@ -65,7 +64,8 @@
 						for (int i = 0; i < recentlist.size(); i++) {
 							%>
 							<div class="grid_3">
-								<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+								<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#"> 
+									<img src=<%=thumburl[i]%>>
 								</a>
 								<div class="desc">
 									<div class="title"><%=title[i]%></div>
@@ -102,7 +102,6 @@
 						for (int i = 0; i < likedlist.size(); i++) {
 							playlisturl[i] = likedlist.get(i).getUrl();
 							title[i] = likedlist.get(i).getTitle();
-							address_url[i] = "player_load.do?url=" + playlisturl[i] + "&title=" + title[i];
 						}
 
 						for (int i = 0; i < likedlist.size(); i++) {
@@ -115,41 +114,36 @@
 							if (i % 4 == 0) {
 								%>
 								<div id="" class="grid_3 alpha">
-									<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+									<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#"> 
+										<img src=<%=thumburl[i]%>>
 									</a>
 									<div class="desc">
 										<div class="title"><%=title[i]%></div>
 									</div>
 								</div>
-								<%
-									} else if (i % 4 == 3) {
-								%>
+							<%} else if (i % 4 == 3) {%>
 								<div id="" class="grid_3 omega">
-									<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+									<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#"> 
+										<img src=<%=thumburl[i]%>>
 									</a>
 									<div class="desc">
 										<div class="title"><%=title[i]%></div>
 									</div>
 								</div>
-								<%
-									} else {
-								%>
+							<%} else {%>
 								<div id="" class="grid_3">
-									<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+									<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#"> 
+										<img src=<%=thumburl[i]%>>
 									</a>
 									<div class="desc">
 										<div class="title"><%=title[i]%></div>
 									</div>
 								</div>
-								<%
-									}
+							<%}
 						}
-					}else{
-					%>
+					}else{%>
 						<h1>좋아요한 플레이리스트가 없습니다.</h1>
-					<%
-					}
-					%>
+					<%}%>
 			</div>
 		</div>
 	</div>

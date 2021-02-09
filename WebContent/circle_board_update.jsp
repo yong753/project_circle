@@ -5,10 +5,16 @@
 <%
 	int num = Integer.parseInt(request.getParameter("num"));
   	String nowPage = request.getParameter("nowPage");
+  	
  	Boardbean bean = (Boardbean) session.getAttribute("bean");
  	String subject = bean.getSubject();
   	String name = bean.getName(); 
   	String content = bean.getContent();
+  	
+  	request.setCharacterEncoding("UTF-8");
+	String alertmsg = (String)request.getAttribute("alert");
+	
+	System.out.println(alertmsg);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +36,11 @@
 	rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-
+<script>
+	<%if(alertmsg != null){%>
+		alert("<%=alertmsg%>");
+	<%}%>
+</script>
 </head>
 <body class="body">
 	<div id="main" class="container_12">
@@ -67,9 +77,9 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="button" value="수정완료"	id="submit_button"> 
+										<input id="submit_button" type="button" value="등록">
 										<input type="reset" value="다시쓰기">
-										<input type="button" value="뒤로" onClick="history.go(-1)">
+										<a class="location" value="board_load.do" href="#"><p>리스트</p></a>
 									</td>
 								</tr>
 							</table>
@@ -98,6 +108,7 @@
 	    	check();
 		})
 	});
+	
 	function check() {
 	   if (document.updateFrm.pass.value == "") {
 		 alert("수정을 위해 패스워드를 입력하세요.");
@@ -106,5 +117,13 @@
 		 }
 	   document.updateFrm.submit();
 	}
+	
+	//글 수정
+	$(document).on("click","#submit_button",function(){
+		var formdata = $("form[name='updateFrm']").serialize();
+		
+		$('#mainframe').empty;
+       	$('#mainframe').load("board_update.do",{"formdata": formdata});
+    })
 </script>
 </html>

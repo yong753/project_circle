@@ -62,9 +62,9 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="submit" value="답변등록" id="submit_button">
+										<input id="submit_button" type="button" value="등록">
 										<input type="reset" value="다시쓰기"> 
-										<input type="button" value="뒤로" onClick="history.back()">
+										<a class="location" value="board_load.do" href="#"><p>리스트</p></a>
 									</td>
 								</tr>
 							</table>
@@ -114,8 +114,17 @@
 			document.replyFrm.pass.focus();
 			return;
 		}
-		document.replyFrm.submit();
 	}
+	
+	//글 등록
+	$(document).on("click","#submit_button",function(){
+		inputCheck()
+		
+		var formdata = $("form[name='replyFrm']").serialize();
+		
+		$('#mainframe').empty;
+       	$('#mainframe').load("board_reply.do",{"formdata": formdata});
+    })
 </script>
 </html>
 

@@ -32,6 +32,9 @@ import action.MemberPasswordCheckAction;
 import action.MemberUpdateAddressAction;
 import action.MemberUpdatePasswordAction;
 import action.PlayerLoadAction;
+import action.PlaylistChangeAction;
+import action.PlaylistLikeAction;
+import action.ReviewSubmitAction;
 import action.SearchAction;
 import action.SearchLoadAction;
 
@@ -87,10 +90,6 @@ import action.SearchLoadAction;
 			}else if(command.equals("/mypage_load.do")) {
 				//action = new MypageLoadAction();
 			}
-			//Goto 액션
-			else if(command.equals("/goto_action.do")) {
-				action = new GotoAction();
-			}
 			//board 액션
 			else if(command.equals("/board_read_load.do")) {
 				action = new BoardReadAction();
@@ -133,7 +132,15 @@ import action.SearchLoadAction;
 				action = new BasicLocationAction();
 			}else if(command.equals("/search_action.do")) {
 				action = new SearchAction();
+			}else if(command.equals("/playlist_change_action.do")) {
+				action = new PlaylistChangeAction();
+			}else if(command.equals("/playlist_like.do")) {
+				action = new PlaylistLikeAction();
+			}else if(command.equals("/review_submit.do")) {
+				action = new ReviewSubmitAction();
 			}
+			
+			
 			action.execute(request,response);
 		}
 	}

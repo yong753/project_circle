@@ -8,10 +8,8 @@
 }
 
 #main >div{
-	margin: 25px 0px 0px 0px;
+	margin: 15px 0px 15px 0px;
 }
-
-/*upper------------------------------------*/
 
 #upper-title {
     margin-top: 30px;
@@ -75,66 +73,41 @@
 	margin-top: 30px;
 }
 
-#upper > #most-recommended > .desc > .title {
-    color: white;
-    font-size: 15px;
+#upper > #most-recommended > .desc{
+	display: block;
+    width: 400px;
+    height: 50px;
 }
 
-#upper > #most-recommended > .desc > .etc {
-    color: gray;
-    font-size: 15px;
-}
-
-#upper #most-recommended p {
-    margin-top: 9px;
-}
-
-
-/*lower------------------------------------*/
-#lower1-title,#lower2-title ,#lower3-title ,#lower4-title{
-    margin-top: 30px;
-}
-
-#lower1-title > p,#lower2-title > p,#lower3-title > p ,#lower4-title > p{
-	width: 600px;
-} 
-
-#lower1,#lower2,#lower3,#lower4 {
-    margin-bottom: 30px;
-}
-
-#lower1 div a .section,#lower2 div a .section,#lower3 div a .section,#lower4 div a .section{
-    width: 220px;
-    height: 260px;
-}
-
-#lower1 > div >a >img,#lower2 > div >a >img,#lower3 > div >a >img,#lower4 > div >a >img{
-    width: 220px;
-    height: 220px;
-}
-
-#main > #lower4{
-	margin-bottom: 100px;
-}
-
-.desc > .title {
-    color: white;
-	width:220px;
-	height: 60px;
-	overflow: hidden;
+#upper > #most-recommended > .desc> p{
+    width: 400px;
+    overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2; /* ���μ� */
+	-webkit-line-clamp: 2; 
 	-webkit-box-orient: vertical;
 	word-wrap:break-word; 
-	line-height: 30px;
-	vertical-align: bottom;
-	padding-top: 5px;
-	font-size: 20px;
+	line-height: 25px;
+	font-size: 17px;
 }
 
+#upper > #most-recommended > img{
+    width: 400px;
+    height: 350px;
+}
 
-.desc > .etc {
-    color: gray;
-    font-size: 15px;
+#main > div > div > a > img{
+	width: 220px;
+	height: 220px;
+} 
+
+#main > div > div > div > div{
+	color: white;
+	font-size: 15px;
+	margin-bottom: 20px;
+	height: 40px;
+} 
+
+#main > .lower1{
+	margin-bottom: 100px;
 }

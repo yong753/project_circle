@@ -13,16 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ListDAO;
+import dao.MemberDAO;
 import dao.TagDAO;
 import basic.WeatherJsonParser;
 import bean.ChartListbean;
 import bean.Listbean;
+import bean.MemberBean;
 import bean.MostRecommendedbean;
 import bean.RecentAddedListbean;
 import bean.TagListbean;
 import bean.WeatherListbean;
 
-public class LibraryLoadAction implements Action{
+public class MypageLoadAction implements Action{
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +33,7 @@ public class LibraryLoadAction implements Action{
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		String id = (String)session.getAttribute("idKey");
-		String url = "/circle_library.jsp";
+		String url = "/circle_mypage.jsp";
 		
 		//로그인 여부 체크
 		if (id == null) {
@@ -41,21 +43,19 @@ public class LibraryLoadAction implements Action{
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/circle_login.jsp");
 			dispatcher.forward(request,response);
 		}else {
-			//List 관련 객체 생성
-			Listbean data = new Listbean();
-			List<Listbean> recentlist = new ArrayList<Listbean>();
-			List<Listbean> likedlist = new ArrayList<Listbean>();
+			//memberDAO 객체 생성
+			MemberDAO mDAO = new MemberDAO();
 			
-			//ListDAO 객체 생성
-			ListDAO lDAO = new ListDAO();
-			
-			//recentlist 및 likedlist 생성
-			recentlist = lDAO.getrecentList(id, 1, 16);
-			likedlist = lDAO.getfavoriteList(id, 1, 16);
+			//db에서 회원정보 가져오기.
+			MemberBean bean = mDAO.getMemberInfo(id);
+			String name = bean.getName();
+			String email = bean.getEmail();
+			String address = bean.getAddress();
 			
 			//request 및 response 설정
-			request.setAttribute("recentlist", recentlist);
-			request.setAttribute("likedlist", likedlist);
+			request.setAttribute("name", name);
+			request.setAttribute("email", email);
+			request.setAttribute("address", address);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request,response);

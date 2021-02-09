@@ -40,45 +40,51 @@ public class BoardReadAction implements Action{
 		if (id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter outs = response.getWriter();
-			outs.println("<script>alert('로그인 해주세요.'); location.href='main_load.do';</script>");
+			outs.println("<script>alert('로그인 해주세요.'); location.href='login_load.do';</script>");
 			outs.flush();
+		}else {
+			//게시판 객체 생성
+			int num = Integer.parseInt(request.getParameter("num"));
+			BoardDAO boarddao = new BoardDAO();
+			String boardtype = (String)session.getAttribute("boardtype");
+			
+			System.out.println(num);
+			
+			//조회 게시물 조회수 증가
+			boarddao.upCount(num, boardtype);
+			
+			//게시물 가져오기
+			Boardbean bean = boarddao.getBoard(num, boardtype);
+			
+			String name = bean.getName();
+			String subject = bean.getSubject();
+			String regdate = bean.getRegdate();
+			String content = bean.getContent();
+			String filename = bean.getFilename();
+			int filesize = bean.getFilesize();
+			String ip = bean.getIp();
+			int count = bean.getCount();
+			
+			System.out.println(name);
+			System.out.println(subject);
+			System.out.println(regdate);
+			System.out.println(content);
+			
+			//request 및 response 설정
+			session.setAttribute("bean", bean);//게시물을 세션에 저장
+			
+			request.setAttribute("num", num);
+			request.setAttribute("name", name);
+			request.setAttribute("subject", subject);
+			request.setAttribute("regdate", regdate);
+			request.setAttribute("content", content);
+			request.setAttribute("filename", filename);
+			request.setAttribute("filesize", filesize);
+			request.setAttribute("ip", ip);
+			request.setAttribute("count", count);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+			dispatcher.forward(request,response);
 		}
-		
-		//게시판 객체 생성
-		int num = Integer.parseInt(request.getParameter("num"));
-		BoardDAO boarddao = new BoardDAO();
-		String boardtype = (String)session.getAttribute("boardtype");
-		
-		//조회 게시물 조회수 증가
-		boarddao.upCount(num, boardtype);
-		
-		//게시물 가져오기
-		Boardbean bean = boarddao.getBoard(num, boardtype);
-		
-		String name = bean.getName();
-		String subject = bean.getSubject();
-		String regdate = bean.getRegdate().substring(0,10);
-		String content = bean.getContent();
-		String filename = bean.getFilename();
-		int filesize = bean.getFilesize();
-		String ip = bean.getIp();
-		int count = bean.getCount();
-		
-		//request 및 response 설정
-		session.setAttribute("bean", bean);//게시물을 세션에 저장
-		
-		request.setAttribute("num", num);
-		request.setAttribute("name", name);
-		request.setAttribute("subject", subject);
-		request.setAttribute("regdate", regdate);
-		request.setAttribute("content", content);
-		request.setAttribute("filename", filename);
-		request.setAttribute("filesize", filesize);
-		request.setAttribute("ip", ip);
-		request.setAttribute("count", count);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-		dispatcher.forward(request,response);
 	}
-	
 }

@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("EUC-KR");
+	request.setCharacterEncoding("UTF-8");
 	String id = (String)session.getAttribute("idKey");
 %>
 
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/portfolio_main.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/portfolio_login_success_style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 
 <body class="body">
@@ -25,13 +25,27 @@
         <div id="login-menu" class="prefix_1 grid_10 suffix_1">
             <fieldset>
                 <legend>
-                    <p>�α���</p>
+                    <p>로그인</p>
                 </legend>
-                <p>�α��� �Ǿ����ϴ�.</p>
-                <p><%=id %>�� ȯ���մϴ�.</p>
-                <a href="goto_action.do?location=main_load.do">
-                <input type="button" value="Ȩ����"></a>
+                <p>로그인 되었습니다.</p>
+                <p><%=id %>님 환영합니다.</p>
+                <a class="location" value="main_load.do" href="#">
+                <input type="button" value="홈으로"></a>
             </fieldset>
         </div>
     </div>
-</body></html>
+</body>
+<script>
+	$(document).ready(function(e) {
+		$('#headerframe').empty;
+		$('#totalrating').empty;
+		$('#review').empty;
+		
+		$('#headerframe').load("circle_header.jsp");
+	    $('#player-title').load("circle_footer.jsp #player-title > *");
+	    $('#review').load("circle_footer.jsp #review > *");
+	})
+	
+</script>
+
+</html>

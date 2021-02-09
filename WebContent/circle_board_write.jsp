@@ -64,9 +64,9 @@
 								</tr>
 								<tr>
 									<td colspan="2">
-										<input type="button" value="등록" id="submit_button"> 
+										<input id="submit_button" type="button" value="등록"> 
 										<input type="reset" value="다시쓰기"> 
-										<input type="button" value="리스트" class="location" value="board_load.do">
+										<a class="location" value="board_load.do" href="#"><p>리스트</p></a>
 									</td>
 								</tr>
 							</table>
@@ -111,7 +111,16 @@
 			document.postFrm.pass.focus();
 			return;
 		}
-		document.postFrm.submit();
 	}
+	
+	//글 등록
+	$(document).on("click","#submit_button",function(){
+		inputCheck()
+		
+		var formdata = $("form[name='postFrm']").serialize();
+		
+		$('#mainframe').empty;
+       	$('#mainframe').load("board_write.do",{"formdata": formdata});
+    })
 </script>
 </html>

@@ -17,9 +17,10 @@ public class MemberLoginAction implements Action{
 	
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		String url = "/circle_frame.jsp";
-		String location = "login_success_load.do";
+		String url = "login_success_load.do";
+		String failurl = "circle_login.jsp";
 		
 		//id,pw 수신
 		String id = request.getParameter("id");
@@ -32,13 +33,13 @@ public class MemberLoginAction implements Action{
 		if(id!=null&&pw!=null) {
 			if(mem.loginCheck(id,pw)) {
 				session.setAttribute("idKey", id);
-				request.setAttribute("location", location);
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-				dispatcher.forward(request,response);
+				response.sendRedirect(url);
 			}else {
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('아이디와 비밀번호를 확인하세요.');</script>");
+				
+				response.sendRedirect(failurl);
 			};
 		}
 	}

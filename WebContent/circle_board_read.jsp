@@ -43,7 +43,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript">
 	function list() {
-		document.listFrm.submit();
+		$('#mainframe').empty;
+		$('#mainframe').load("board_load.do",{"nowPage": "<%=nowPage%>" , "keyField": "<%=keyField%>", "keyWord": "<%=keyWord%>"});
 	}
 
 	function down(filename) {
@@ -96,9 +97,9 @@
 		<hr />
 		
 		[ <a href="javascript:list()">리스트</a>
-		| <a class="location" value="circle_board_update_load.do?nowPage=<%=nowPage%>&num=<%=num%>" href="#">수 정</a>
-		| <a class="location" value="circle_board_reply_load.do?nowPage=<%=nowPage%>" href="#">답 변</a> 
-		| <a class="location" value="circle_board_delete_load.do?nowPage=<%=nowPage%>&num=<%=num%>" href="#">삭 제</a>
+		| <a class="location" value="circle_board_update.jsp?nowPage=<%=nowPage%>&num=<%=num%>" href="#">수 정</a>
+		| <a class="location" value="circle_board_reply.jsp?nowPage=<%=nowPage%>" href="#">답 변</a> 
+		| <a class="location" value="circle_board_delete.jsp?nowPage=<%=nowPage%>&num=<%=num%>" href="#">삭 제</a>
 		] <br />
 
 		<form name="downFrm" action="portfolio_download.jsp" method="post">
@@ -110,8 +111,8 @@
 			<%
 				if (!(keyWord == null || keyWord.equals(""))) {
 			%>
-			<input type="hidden" name="keyField" value="<%=keyField%>"> <input
-				type="hidden" name="keyWord" value="<%=keyWord%>">
+			<input type="hidden" name="keyField" value="<%=keyField%>"> 
+			<input type="hidden" name="keyWord" value="<%=keyWord%>">
 			<%
 				}
 			%>

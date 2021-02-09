@@ -51,10 +51,11 @@ public class BoardDeleteAction implements Action{
 				String url = "board_load.do?nowPage=" + nowPage;
 				response.sendRedirect(url);
 			} else {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter outs = response.getWriter();
-				outs.println("<script> alert('비밀번호가 틀립니다.'); history.back(); </script>");
-				outs.flush();
+				String alert = "비밀번호가 틀립니다.";
+				request.setAttribute("alert", alert);
+				
+				String url = "circle_board_delete.jsp?nowPage="+nowPage+"&num="+ num;
+				response.sendRedirect(url);
 			}
 		}
 	}

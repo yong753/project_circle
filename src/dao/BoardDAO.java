@@ -49,7 +49,7 @@ public class BoardDAO {
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 				
-				System.out.println("±×³É");
+				System.out.println("ï¿½×³ï¿½");
 			} else {
 				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from board where lower("+keyField+") like ? order by ref desc, pos asc)) where numrow>=? and numrow<=?";
 				pstmt = con.prepareStatement(sql);
@@ -59,7 +59,7 @@ public class BoardDAO {
 				
 				System.out.println(keyWord);
 				System.out.println(keyField);
-				System.out.println("°Ë»ö");
+				System.out.println("ï¿½Ë»ï¿½");
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -96,7 +96,7 @@ public class BoardDAO {
 				pstmt.setInt(1, start);
 				pstmt.setInt(2, end);
 				
-				System.out.println("±×³É");
+				System.out.println("ï¿½×³ï¿½");
 			} else {
 				sql = "select * from (select rownum numrow,num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from (select num,name,content,subject,ref,pos,depth,regdate,pass,count,ip,filename,filesize from notice where lower("+keyField+") like ? order by ref desc, pos asc)) where numrow>=? and numrow<=?";
 				pstmt = con.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class BoardDAO {
 				pstmt.setInt(2, start);
 				pstmt.setInt(3, end);
 				
-				System.out.println("°Ë»ö");
+				System.out.println("ï¿½Ë»ï¿½");
 			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -128,7 +128,7 @@ public class BoardDAO {
 	}
 	
 	
-	//ÃÑ °Ô½Ã¹°¼ö board
+	//ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ board
 	public int getboardTotalCount(String keyField, String keyWord) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -185,7 +185,7 @@ public class BoardDAO {
 		return totalCount;
 	}
 	
-	// °Ô½Ã¹° ÀÔ·Â
+	// ï¿½Ô½Ã¹ï¿½ ï¿½Ô·ï¿½
 	public void insertBoard(HttpServletRequest req) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -248,7 +248,7 @@ public class BoardDAO {
 	}
 	
 	
-	// °Ô½Ã¹° ¸®ÅÏ
+	// ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public Boardbean getBoard(int num,String boardtype) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -257,7 +257,7 @@ public class BoardDAO {
 		Boardbean bean = new Boardbean();
 		try {
 			con = pool.getConnection();
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "select * from notice where num=?";
 			}else {
 				sql = "select * from board where num=?";
@@ -288,14 +288,14 @@ public class BoardDAO {
 		return bean;
 	}
 
-	// Á¶È¸¼ö Áõ°¡
+	// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void upCount(int num,String boardtype) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "update notice set count=count+1 where num=?";
 			}else {
 				sql = "update board set count=count+1 where num=?";
@@ -310,7 +310,7 @@ public class BoardDAO {
 		}
 	}
 
-	// °Ô½Ã¹° »èÁ¦
+	// ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void deleteBoard(int num,String boardtype) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -318,7 +318,7 @@ public class BoardDAO {
 		ResultSet rs = null;
 		try {
 			con = pool.getConnection();
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "select filename from notice where num = ?";
 			}else {
 				sql = "select filename from board where num = ?";
@@ -333,7 +333,7 @@ public class BoardDAO {
 						UtilMgr.delete(SAVEFOLDER + "/" + rs.getString(1));
 				}
 			}
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "delete from notice where num=?";
 			}else {
 				sql = "delete from board where num=?";
@@ -348,14 +348,14 @@ public class BoardDAO {
 		}
 	}
 
-	// °Ô½Ã¹° ¼öÁ¤
+	// ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void updateBoard(Boardbean bean,String boardtype) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "update notice set name=?,subject=?,content=? where num=?";
 			}else {
 				sql = "update board set name=?,subject=?,content=? where num=?";
@@ -373,14 +373,14 @@ public class BoardDAO {
 		}
 	}
 
-	// °Ô½Ã¹° ´äº¯
+	// ï¿½Ô½Ã¹ï¿½ ï¿½äº¯
 	public void replyBoard(Boardbean bean,String boardtype) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		try {
 			con = pool.getConnection();
-			if(boardtype.equals("°øÁö»çÇ×")) {
+			if(boardtype.equals("ê³µì§€ì‚¬í•­")) {
 				sql = "insert into notice (num,name,content,subject,ref,pos,depth,regdate,pass,count,ip)";
 				sql += "values(num_seq.nextval,?,?,?,?,?,?,sysdate,?,0,?)";
 			}else {
@@ -407,7 +407,7 @@ public class BoardDAO {
 		}
 	}
 
-	// ´äº¯¿¡ À§Ä¡°ª Áõ°¡
+	// ï¿½äº¯ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void replyUpBoard(int ref, int pos) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -426,7 +426,7 @@ public class BoardDAO {
 		}
 	}
 
-	//ÆÄÀÏ ´Ù¿î·Îµå
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¿ï¿½Îµï¿½
 		public void downLoad(HttpServletRequest req, HttpServletResponse res,
 				JspWriter out, PageContext pageContext) {
 			try {
@@ -461,7 +461,7 @@ public class BoardDAO {
 			}
 		}
 		
-	//ÆäÀÌÂ¡ ¹× ºí·° Å×½ºÆ®¸¦ À§ÇÑ °Ô½Ã¹° ÀúÀå ¸Ş¼Òµå 
+	//ï¿½ï¿½ï¿½ï¿½Â¡ ï¿½ï¿½ ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½ 
 	public void post1000(){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -487,7 +487,7 @@ public class BoardDAO {
 		System.out.println("SUCCESS");
 	}
 	
-	//³¯Â¥ ¼ö½Å
+	//ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½
 	public String getDate() {
 		String SQL = "SELECT TO_CHAR(SYSDATE, YYYY-MM-DD HH24:MI:SS) FROM DUAL";
 		Connection conn = null;
@@ -501,10 +501,10 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ""; // µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return ""; // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
-	// bbsID °Ô½Ã±Û ¹øÈ£ °¡Á®¿À´Â ÇÔ¼ö
+	// bbsID ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
 	public int getNext() {
 		String SQL = "SELECT BBSNUMBER FROM BOARD ORDER BY BBSNUMBER DESC";
 		Connection conn = null;
@@ -514,15 +514,15 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				return rs.getInt(2) + 1;
-			} // rs.getInt(1)ÀÇ °ª : ½ÇÇàµÈ Äõ¸®¹®¿¡¼­ Ã¹¹øÂ°ÀÇ °ª
-			return 1;// Ã¹ ¹øÂ° °Ô½Ã¹°ÀÎ °æ¿ì
+			} // rs.getInt(1)ï¿½ï¿½ ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â°ï¿½ï¿½ ï¿½ï¿½
+			return 1;// Ã¹ ï¿½ï¿½Â° ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
-	// ½ÇÁ¦·Î ±ÛÀ» ÀÛ¼ºÇÏ´Â ÇÔ¼ö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½
 	public int write(String bbsTitle, String userID, String bbsContent) {
 		String SQL = "INSERT INTO BOARD VALUES(?, ?, ?, ?, ?, ?)";
 		Connection conn = null;
@@ -532,13 +532,13 @@ public class BoardDAO {
 			pstmt.setString(1, userID); // userid
 			pstmt.setInt(2, getNext()); // bbsnumber
 			pstmt.setString(3, getDate()); // bbsdate
-			//4¹øÀº write typeÀÎµ¥ ¾ÆÁ÷ ¾øÀ½
+			//4ï¿½ï¿½ï¿½ï¿½ write typeï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			pstmt.setString(5, bbsTitle); // title
 			pstmt.setString(6, bbsContent); // content
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return -1; // µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return -1; // ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 }

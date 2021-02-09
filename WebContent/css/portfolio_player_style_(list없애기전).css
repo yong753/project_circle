@@ -116,18 +116,16 @@
 	margin: 0 auto;
 	width: 80%;
 	min-height: 100%;
-	text-align: center;
-	vertical-align: top;
 }
 
 /* 컨텐츠영역 */
 #contents-title{
-	text-align: left;
 	margin-left: 3%;
 }
 
 #jacket {
 	position: relative;
+	width: 45%;
 	height: 100%;
 	margin: 1%;
 	display: inline-block;
@@ -246,13 +244,9 @@
 
 /* 리뷰영역 */
 #review{
-	position: relative;
-	width: 55%;
-	height: 500px;
+	width: 45%;
 	margin: 1%;
 	display: inline-block;
-	top: -300px;
-	text-align: left;
 }
 
 #review > h2{
@@ -275,7 +269,7 @@
 
 #review > #reviewlist > ul > p{
 	font-size: 20px;
-	color: white;
+	color: gray;
 }
 
 #review > #reviewlist > ul > li{
@@ -447,7 +441,7 @@ star-input>.input.focus {
 }
 
 #oneline{
-	width: 350px;
+	width: 450px;
 	height: 20px;
 	font-size: 12px;
 }

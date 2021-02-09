@@ -73,7 +73,8 @@
 							if (i % 4 == 0) {
 				%>
 				<div id="" class="grid_3 alpha">
-					<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+					<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#"> 
+						<img src=<%=thumburl[i]%>>
 					</a>
 					<div class="desc">
 						<div class="title"><%=title[i]%></div>
@@ -83,7 +84,8 @@
 					} else if (i % 4 == 3) {
 				%>
 				<div id="" class="grid_3 omega">
-					<a href="<%=address_url[i]%>"> <img src=<%=thumburl[i]%>>
+					<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#">
+						<img src=<%=thumburl[i]%>>
 					</a>
 					<div class="desc">
 						<div class="title"><%=title[i]%></div>
@@ -93,7 +95,8 @@
 					} else {
 				%>
 				<div id="" class="grid_3">
-					<a href="<%=address_url[i]%>"><img src=<%=thumburl[i]%>>
+					<a class="playlist" name="<%=title[i]%>" value="<%=playlisturl[i]%>" href="#">
+						<img src=<%=thumburl[i]%>>
 					</a>
 					<div class="desc">
 						<div class="title"><%=title[i]%></div>

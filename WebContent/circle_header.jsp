@@ -22,6 +22,8 @@
 	rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
+	var keyword;
+	
 	function searchOpen(){
 		var searcharea = document.getElementById("searcharea");
 		searcharea.classList.add("active");
@@ -31,18 +33,15 @@
 		var searcharea = document.getElementById("searcharea");
 		searcharea.classList.remove("active");
 	}
-	var keyword;
 	
-	$(document).ready(function(e) {
-		$("#search-value").on("propertychange change keyup paste input", function() {
-			keyword = $(this).val();
-	        console.log(keyword);
-		})
-		
-		$("#search-button").click( function(){
-		    $('#mainframe').load("search_load.do",{"keyword":keyword});
-		})
-	})
+	//플레이어 오픈
+	function playerOpen() {
+		if ($("#player-area").attr("class") == "active") {
+            $("#player-area").attr("class", "");
+        } else {
+            $("#player-area").attr("class", "active");
+        }
+	};
 </script>	
 
 </head>
@@ -73,7 +72,9 @@
 			<%
 				if (id != null) {%>
 			<p><%=id%> / </p>
-			<a class="location" value="member_logout.do" href='#'><p>LOGOUT</p></a>&nbsp;&nbsp;
+			<a href='member_logout.do'>
+				<p>LOGOUT</p>
+			</a>&nbsp;&nbsp;
 			<%} else {%>
 			<a class="location" value="circle_login.jsp" href="#"><p>LOGIN</p></a>&nbsp;&nbsp;
 			<%

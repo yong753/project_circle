@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%
- 
 	//세션에서 기본정보 로드
 	request.setCharacterEncoding("UTF-8");
  	String location = (String)request.getAttribute("location");
@@ -12,11 +11,6 @@
  	}
 	String id = (String)session.getAttribute("idKey");
 	
-	//리스트 정보 및 기타 정보로드
-	String mostrecommendedurl = (String)session.getAttribute("mostrecommendedurl"); //List가 아니라 url형태의 String객체임
-	
-	//검토
-	System.out.print("프레임 로드" + mostrecommendedurl);
  %>
 <!DOCTYPE html>
 <html>
@@ -27,43 +21,63 @@
 </head>
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <body>
-	<jsp:include page="circle_header.jsp" flush="false"/>
+	<div id="headerframe">
+		<jsp:include page="circle_header.jsp"/>
+	</div>
 	
 	<div>
 		<div id="mainframe"></div>
 	</div>
 	
-	<jsp:include page="circle_footer.jsp" flush="false">
-		<jsp:param name="mostrecommended" value="<%=mostrecommendedurl%>"/>
-	</jsp:include>	
-</body>
+	<div id="footerframe">
+		<jsp:include page="circle_footer.jsp"/>
+	</div>
+	
 	<script>
-	$(document).ready(function(e) {
-		//getPage 함수정의
-	    function getPage(location){
+		//메인페이지 로드
+		$(document).ready(function(e) {
+			$('#mainframe').empty;
+	       	$('#mainframe').load("<%=location%>");
+		})
+	       	
+      	//검색어 저장
+    	$(document).on("propertychange change keyup paste input","#search-value",function() {
+    		keyword = $(this).val();
+            console.log(keyword);
+    	})
+    	
+    	//검색
+    	$(document).on("click","#search-button", function(){
+    		$('#mainframe').empty;
+    	    $('#mainframe').load("search_load.do",{"keyword":keyword});
+    	})
+    	
+    	//페이지로드 이벤트
+       $(document).on("click",".location",function(){
+        	var location = $(this).attr("value");
+        	console.log(location);
+        	
+        	$('#mainframe').empty;
            	$('#mainframe').load(location);
-		}
-		
-		//페이지 로드
-		getPage('<%=location%>');		
-		
-		//헤더 - 페이지로드 이벤트
-	    $(".location").click(function(){
-	    	getPage($(this).attr("value"));
-	    })
-	    
-	});
-	
-	function searchOpen(){
-		var searcharea = document.getElementById("searcharea");
-		searcharea.classList.add("active");
-	}
-	
-	function searchClose(){
-		var searcharea = document.getElementById("searcharea");
-		searcharea.classList.remove("active");
-	}
-	
-	
+        });
+    	
+    	//플레이리스트 변경
+    	$(document).on("click",".playlist",function(){
+    		console.log($(this).attr("value"));
+    		console.log($(this).attr("name"));
+    		
+        	$.ajax({
+        		type : "POST",
+        		url : "playlist_change_action.do",
+        		data : {"playlisturl": $(this).attr("value"), "playlisttitle": $(this).attr("name") },
+        		success : function(){
+        			alert('플레이리스트 변경 성공');
+        			location.reload()
+        		}, error : function(){
+        			alert('플레이리스트 변경 실패')
+        		}
+        	})
+        })
 	</script>
+</body>
 </html>

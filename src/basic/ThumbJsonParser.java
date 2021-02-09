@@ -88,6 +88,26 @@ public class ThumbJsonParser {
 		return k.snippet.thumbnails.medium.url;
 	}
 	
+	public String getlargethumb(String url) throws Exception {
+		String json = readUrl(url);
+
+		JsonElement jsonElement = new JsonParser().parse(json);
+		Gson pretty = new GsonBuilder().setPrettyPrinting().create();
+
+		String element = pretty.toJson(jsonElement);
+		System.out.println(element);
+
+		Gson gson = new Gson();
+		Items ite = gson.fromJson(json, Items.class);
+
+		Key k = ite.items.get(0);
+		
+		System.err.println(k.snippet.thumbnails.maxres.url);
+
+		return k.snippet.thumbnails.maxres.url;
+	}
+	
+	
 	
 	public String getDesc(String url) throws Exception {
 		String json = readUrl(url);

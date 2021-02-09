@@ -57,10 +57,11 @@ public class BoardUpdateAction implements Action{
 			String url = "board_load.do?nowPage=" + nowPage + "&num=" + upBean.getNum();
 			response.sendRedirect(url);
 		} else {
-			out.println("<script>");
-			out.println("alert('입력하신 비밀번호가 아닙니다.');");
-			out.println("history.back();");
-			out.println("</script>");
+			String alert = "로그인 해주세요";
+			request.setAttribute("alert", alert);
+			
+			String url = "circle_board_update.jsp?nowPage="+nowPage+"&num="+ upBean.getNum();
+			response.sendRedirect(url);
 		}
 	}
 	

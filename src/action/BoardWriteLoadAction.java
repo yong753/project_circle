@@ -30,9 +30,17 @@ public class BoardWriteLoadAction implements Action{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//기본객체
+		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
+		String id = (String)session.getAttribute("idKey");
 		
-		response.sendRedirect("circle_board_write.jsp");
+		if (id == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter outs = response.getWriter();
+			outs.println("<script>alert('로그인 해주세요.'); location.href='frame_load.do?location=login_load.do';</script>");
+		}else {
+			response.sendRedirect("circle_board_write.jsp");
+		}
 	}
-	
 }

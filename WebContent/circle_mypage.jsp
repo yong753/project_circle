@@ -6,23 +6,13 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String id = (String) session.getAttribute("idKey");
-
-	//로그인체크
-	if (id == null) {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter outs = response.getWriter();
-		outs.println("<script>alert('로그인 해주세요.'); location.href='circle_main.jsp';</script>");
-		outs.flush();
-	}
-	//memberDAO 객체 생성
-	MemberDAO mDAO = new MemberDAO();
+	String id = (String)session.getAttribute("idKey");
 	
-	//db에서 회원정보 가져오기.
-	MemberBean bean = mDAO.getMemberInfo(id);
-	String name = bean.getName();
-	String email = bean.getEmail();
-	String address = bean.getAddress();
+	//회원정보 가져오기.
+	String name = (String)request.getAttribute("name");
+	String email = (String)request.getAttribute("email");
+	String address = (String)request.getAttribute("address");
+	
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -3,11 +3,11 @@
 	min-height: 1010px;
 }
 
-#chart-title form{
+#chart-title a{
 	display: inline-block;
 }
 
-#chart-title form input{
+#chart-title a input{
 font-size: 1.5em;
   font-family: 'Heebo', sans-serif;
   background-color: transparent;
@@ -22,7 +22,7 @@ font-size: 1.5em;
   width: 100px;
 }
 
-#chart-title form .active{
+#chart-title a .active{
 	font-size: 1.5em;
   	font-family: 'Heebo', sans-serif;
   	border: 0.1em solid red;
@@ -85,7 +85,7 @@ font-size: 1.5em;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
-	-webkit-line-clamp: 2; /* ¶óÀÎ¼ö */
+	-webkit-line-clamp: 2; /* ï¿½ï¿½ï¿½Î¼ï¿½ */
 	-webkit-box-orient: vertical;
 	word-wrap:break-word; 
 	line-height: 17.5px;
